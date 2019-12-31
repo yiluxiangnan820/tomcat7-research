@@ -218,7 +218,7 @@ public final class Bootstrap {
             startupInstance.getClass().getMethod(methodName, paramTypes);
         //调用Catalina.setParentClassLoader设置父类加载器为sharedLoader
         method.invoke(startupInstance, paramValues);
-
+        //将实例化好的Catalina.class赋值给catalinaDaemon
         catalinaDaemon = startupInstance;
     }
 
@@ -246,6 +246,7 @@ public final class Bootstrap {
         if (log.isDebugEnabled()) {
             log.debug("Calling startup class " + method);
         }
+        //调用org.apache.catalina.startup.Catalina.load()方法
         method.invoke(catalinaDaemon, param);
     }
 
@@ -476,9 +477,9 @@ public final class Bootstrap {
      * working directory if it has not been set.
      */
     private void setCatalinaHome() {
-
         if (System.getProperty(Globals.CATALINA_HOME_PROP) != null)
             return;
+        //System.getProperty("user.dir")为tomcat安装根目录
         File bootstrapJar =
             new File(System.getProperty("user.dir"), "bootstrap.jar");
         if (bootstrapJar.exists()) {

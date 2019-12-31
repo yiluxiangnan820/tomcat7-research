@@ -863,7 +863,7 @@ public class Catalina {
             }
             System.setProperty(Globals.CATALINA_BASE_PROP, catalinaBase);
         }
-
+        //获取操作系统缓存的临时目录
         String temp = System.getProperty("java.io.tmpdir");
         if (temp == null || (!(new File(temp)).exists())
                 || (!(new File(temp)).isDirectory())) {
@@ -886,6 +886,7 @@ public class Catalina {
             log.info( "Catalina naming disabled");
             System.setProperty("catalina.useNaming", "false");
         } else {
+            //默认开启useNaming
             System.setProperty("catalina.useNaming", "true");
             String value = "org.apache.naming";
             String oldValue =
