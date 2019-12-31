@@ -654,7 +654,7 @@ public class Catalina {
                 }
             }
         }
-
+        //getServer（）获得StandardServer
         getServer().setCatalina(this);
 
         // Stream redirection
@@ -732,6 +732,7 @@ public class Catalina {
         // Register shutdown hook
         if (useShutdownHook) {
             if (shutdownHook == null) {
+                //关闭tomcat的钩子
                 shutdownHook = new CatalinaShutdownHook();
             }
             Runtime.getRuntime().addShutdownHook(shutdownHook);
@@ -875,6 +876,7 @@ public class Catalina {
 
     protected void initStreams() {
         // Replace System.out and System.err with a custom PrintStream
+        // 使用自定义输出流
         System.setOut(new SystemLogHandler(System.out));
         System.setErr(new SystemLogHandler(System.err));
     }
@@ -894,6 +896,7 @@ public class Catalina {
             if (oldValue != null) {
                 value = value + ":" + oldValue;
             }
+            //用于创建JNDI的工厂类，调用工厂类的getObjectInstance方法获取JNDI上下文
             System.setProperty(javax.naming.Context.URL_PKG_PREFIXES, value);
             if( log.isDebugEnabled() ) {
                 log.debug("Setting naming prefix=" + value);

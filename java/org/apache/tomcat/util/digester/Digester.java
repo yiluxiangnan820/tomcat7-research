@@ -334,6 +334,7 @@ public class Digester extends DefaultHandler2 {
 
     /**
      * The object stack being constructed.
+     * 基于数组实现的栈
      */
     protected ArrayStack<Object> stack = new ArrayStack<Object>();
 
