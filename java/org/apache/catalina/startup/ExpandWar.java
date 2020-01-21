@@ -200,6 +200,7 @@ public class ExpandWar {
         throws IOException {
 
         // Make the appBase absolute
+        //设置appBase绝对路径
         File appBase = new File(host.getAppBase());
         if (!appBase.isAbsolute()) {
             appBase = new File(System.getProperty(Globals.CATALINA_BASE_PROP),

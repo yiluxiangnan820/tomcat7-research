@@ -73,6 +73,8 @@ import org.apache.tomcat.util.res.StringManager;
  * requests. Requests of any other type will simply be passed through.
  *
  * @author Craig R. McClanahan
+ * Value的基础实现，类似于Filter作用
+ *
  */
 public abstract class AuthenticatorBase extends ValveBase
         implements Authenticator {

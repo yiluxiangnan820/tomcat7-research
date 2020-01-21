@@ -129,7 +129,7 @@ final class StandardContextValve extends ValveBase {
 
         // Select the Wrapper to be used for this Request
         Wrapper wrapper = request.getWrapper();
-
+        //注册CometEvent事件，由server像client写数据--基于http长连接
         wrapper.getPipeline().getFirst().event(request, response, event);
     }
 }

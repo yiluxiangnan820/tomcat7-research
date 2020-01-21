@@ -154,6 +154,7 @@ import org.apache.tomcat.util.buf.B2CConverter;
  * @author Remy Maucherat
  * @author Takayuki Kaneko
  * @author Peter Rossbach
+ * access_log日志打印实现
  */
 public class AccessLogValve extends ValveBase implements AccessLog {
 
