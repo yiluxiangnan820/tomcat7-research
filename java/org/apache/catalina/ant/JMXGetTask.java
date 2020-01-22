@@ -100,6 +100,5 @@ public class JMXGetTask extends AbstractCatalinaTask {
             throw new BuildException
                 ("Invalid 'charset' attribute: " + getCharset());
         }
-
     }
 }
