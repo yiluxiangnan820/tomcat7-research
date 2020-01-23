@@ -1208,6 +1208,10 @@ public abstract class WebappClassLoaderBase extends URLClassLoader
      * Have one or more classes or resources been modified so that a reload
      * is appropriate?
      */
+    /**
+     * 判断是否有class或资源文件被修改
+     * @return
+     */
     public boolean modified() {
 
         if (log.isDebugEnabled())

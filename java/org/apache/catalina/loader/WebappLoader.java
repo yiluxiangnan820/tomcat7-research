@@ -41,13 +41,7 @@ import javax.naming.NamingException;
 import javax.naming.directory.DirContext;
 import javax.servlet.ServletContext;
 
-import org.apache.catalina.Container;
-import org.apache.catalina.Context;
-import org.apache.catalina.Globals;
-import org.apache.catalina.Lifecycle;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.LifecycleState;
-import org.apache.catalina.Loader;
+import org.apache.catalina.*;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.mbeans.MBeanUtils;
 import org.apache.catalina.util.LifecycleMBeanBase;
@@ -426,6 +420,16 @@ public class WebappLoader extends LifecycleMBeanBase
     }
 
 
+    @Override
+    public void removeLifecycleListener(LifecycleListener listener) {
+        super.removeLifecycleListener(listener);
+    }
+
+    @Override
+    protected void initInternal() throws LifecycleException {
+        super.initInternal();
+    }
+
     /**
      * Execute a periodic task, such as reloading, etc. This method will be
      * invoked inside the classloading context of this container. Unexpected
@@ -433,6 +437,7 @@ public class WebappLoader extends LifecycleMBeanBase
      */
     @Override
     public void backgroundProcess() {
+        //后台任务周期性检查是否需要重新加载及是否有文件被修改（class文件及资源文件）
         if (reloadable && modified()) {
             try {
                 Thread.currentThread().setContextClassLoader

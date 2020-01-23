@@ -4204,6 +4204,7 @@ public class StandardContext extends ContainerBase
         setPaused(true);
 
         try {
+         //关闭容器
             stop();
         } catch (LifecycleException e) {
             log.error(
@@ -4211,6 +4212,7 @@ public class StandardContext extends ContainerBase
         }
 
         try {
+         //启动容器
             start();
         } catch (LifecycleException e) {
             log.error(

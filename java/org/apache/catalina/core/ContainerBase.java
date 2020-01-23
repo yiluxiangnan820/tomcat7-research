@@ -1230,6 +1230,7 @@ public abstract class ContainerBase extends LifecycleMBeanBase
         // Start our child containers, if any
         Container children[] = findChildren();
         List<Future<Void>> results = new ArrayList<Future<Void>>();
+        //启动所有子容器
         for (int i = 0; i < children.length; i++) {
             results.add(startStopExecutor.submit(new StartChild(children[i])));
         }
@@ -1238,6 +1239,7 @@ public abstract class ContainerBase extends LifecycleMBeanBase
 
         for (Future<Void> result : results) {
             try {
+                //获取任务执行回调结果
                 result.get();
             } catch (Throwable e) {
                 log.error(sm.getString("containerBase.threadedStartFailed"), e);
@@ -1634,6 +1636,7 @@ public abstract class ContainerBase extends LifecycleMBeanBase
         @Override
         public void run() {
             Throwable t = null;
+            //后台线程意外结束
             String unexpectedDeathMessage = sm.getString(
                     "containerBase.backgroundProcess.unexpectedThreadDeath",
                     Thread.currentThread().getName());
