@@ -119,6 +119,7 @@ public abstract class LifecycleBase implements Lifecycle {
      */
     protected void fireLifecycleEvent(String type, Object data) {
         LifecycleEvent event = new LifecycleEvent(this, type, data);
+        //将事件添加到监听器中
         for (LifecycleListener listener : lifecycleListeners) {
             listener.lifecycleEvent(event);
         }
@@ -127,13 +128,16 @@ public abstract class LifecycleBase implements Lifecycle {
 
     @Override
     public final synchronized void init() throws LifecycleException {
+        //防止当前线程在进入init方法前state被其他线程修改
         if (!state.equals(LifecycleState.NEW)) {
             invalidTransition(Lifecycle.BEFORE_INIT_EVENT);
         }
 
         try {
+            //设置state为初始化中
             setStateInternal(LifecycleState.INITIALIZING, null, false);
             initInternal();
+            //设置state为已初始化
             setStateInternal(LifecycleState.INITIALIZED, null, false);
         } catch (Throwable t) {
             handleSubClassException(t, "lifecycleBase.initFail", toString());
@@ -152,6 +156,7 @@ public abstract class LifecycleBase implements Lifecycle {
 
     /**
      * {@inheritDoc}
+     * 启动tomcat
      */
     @Override
     public final synchronized void start() throws LifecycleException {
@@ -427,6 +432,7 @@ public abstract class LifecycleBase implements Lifecycle {
 
     private void invalidTransition(String type) throws LifecycleException {
         String msg = sm.getString("lifecycleBase.invalidTransition", type, toString(), state);
+        //抛出无效过渡异常
         throw new LifecycleException(msg);
     }
 

@@ -127,6 +127,7 @@ public class StandardEngine extends ContainerBase implements Engine {
      */
     @Override
     public Realm getRealm() {
+        //todo
         Realm configured = super.getRealm();
         // If no set realm has been called - default to NullRealm
         // This can be overridden at engine, context and host level

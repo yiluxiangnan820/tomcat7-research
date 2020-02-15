@@ -1184,6 +1184,10 @@ public abstract class ContainerBase extends LifecycleMBeanBase
     }
 
 
+    /**
+     * tomcat初始化的默认实现
+     * @throws LifecycleException
+     */
     @Override
     protected void initInternal() throws LifecycleException {
         BlockingQueue<Runnable> startStopQueue =
@@ -1193,6 +1197,7 @@ public abstract class ContainerBase extends LifecycleMBeanBase
                 getStartStopThreadsInternal(), 10, TimeUnit.SECONDS,
                 startStopQueue,
                 new StartStopThreadFactory(getName() + "-startStop-"));
+        //终端工作线程
         startStopExecutor.allowCoreThreadTimeOut(true);
         super.initInternal();
     }

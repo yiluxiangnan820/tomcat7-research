@@ -55,8 +55,9 @@ public abstract class LifecycleMBeanBase extends LifecycleBase
         // If oname is not null then registration has already happened via
         // preRegister().
         if (oname == null) {
+            //获取JMX监控信息
             mserver = Registry.getRegistry(null, null).getMBeanServer();
-
+            //注册组件类型名称
             oname = register(this, getObjectNameKeyProperties());
         }
     }

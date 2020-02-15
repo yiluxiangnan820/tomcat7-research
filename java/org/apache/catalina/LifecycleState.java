@@ -53,6 +53,7 @@ public enum LifecycleState {
     MUST_DESTROY(false, null);
 
     private final boolean available;
+    //生命周期事件
     private final String lifecycleEvent;
 
     private LifecycleState(boolean available, String lifecycleEvent) {
