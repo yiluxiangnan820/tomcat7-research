@@ -73,10 +73,11 @@ public final class Bootstrap {
 
     private void initClassLoaders() {
         try {
-            //父加载器AppClassLoader
+            //通用模块类加载器，类型为URLClassLoader
             commonLoader = createClassLoader("common", null);
             if (commonLoader == null) {
                 // no config file, default to this loader - we might be in a 'single' env.
+                //若无类加载器配置，默认类加器为AppClassLoader
                 commonLoader = this.getClass().getClassLoader();
             }
             catalinaLoader = createClassLoader("server", commonLoader);
@@ -194,6 +195,7 @@ public final class Bootstrap {
         //创建类加载器：commonLoader，catalinaLoader,sharedLoader
         initClassLoaders();
 
+        //线程上下文类加载器默认为ApplicationClassLoader
         Thread.currentThread().setContextClassLoader(catalinaLoader);
 
         SecurityClassLoad.securityClassLoad(catalinaLoader);
