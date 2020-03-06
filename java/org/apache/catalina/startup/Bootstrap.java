@@ -80,7 +80,9 @@ public final class Bootstrap {
                 //若无类加载器配置，默认类加器为AppClassLoader
                 commonLoader = this.getClass().getClassLoader();
             }
+            //catalinaLoader用于隔离tomcat server目录下类文件与应用类文件
             catalinaLoader = createClassLoader("server", commonLoader);
+            //sharedLoader用于加载应用共享的通用类文件
             sharedLoader = createClassLoader("shared", commonLoader);
         } catch (Throwable t) {
             handleThrowable(t);
@@ -203,6 +205,7 @@ public final class Bootstrap {
         // Load our startup class and call its process() method
         if (log.isDebugEnabled())
             log.debug("Loading startup class");
+        //catalinaLoader加载Catalina执行启动/关闭命令
         Class<?> startupClass =
             catalinaLoader.loadClass
             ("org.apache.catalina.startup.Catalina");
@@ -248,7 +251,7 @@ public final class Bootstrap {
         if (log.isDebugEnabled()) {
             log.debug("Calling startup class " + method);
         }
-        //调用org.apache.catalina.startup.Catalina.load()方法
+        //反射调用org.apache.catalina.startup.Catalina.load()方法
         method.invoke(catalinaDaemon, param);
     }
 

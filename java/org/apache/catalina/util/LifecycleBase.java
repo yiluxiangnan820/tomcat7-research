@@ -156,7 +156,7 @@ public abstract class LifecycleBase implements Lifecycle {
 
     /**
      * {@inheritDoc}
-     * 启动tomcat
+     * 启动tomcat容器
      */
     @Override
     public final synchronized void start() throws LifecycleException {

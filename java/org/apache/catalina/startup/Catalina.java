@@ -245,7 +245,7 @@ public class Catalina {
      * Process the specified command line arguments, and return
      * <code>true</code> if we should continue processing; otherwise
      * return <code>false</code>.
-     *
+     * 处理终端输入命令行
      * @param args Command line arguments to process
      */
     protected boolean arguments(String args[]) {
@@ -686,6 +686,7 @@ public class Catalina {
     public void load(String args[]) {
 
         try {
+            //start、configtest、stop命令需要执行load方法
             if (arguments(args)) {
                 load();
             }
@@ -822,7 +823,6 @@ public class Catalina {
 
 
     protected void initDirs() {
-
         String catalinaHome = System.getProperty(Globals.CATALINA_HOME_PROP);
         if (catalinaHome == null) {
             // Backwards compatibility patch for J2EE RI 1.3
