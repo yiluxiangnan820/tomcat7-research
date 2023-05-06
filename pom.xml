@@ -69,5 +69,10 @@
             <artifactId>ecj</artifactId>
             <version>4.5.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.ecloud.sdk</groupId>
+            <artifactId>ecloud-sdk-ecs</artifactId>
+            <version>1.0.27</version>
+        </dependency>
     </dependencies>
 </project>
